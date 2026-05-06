@@ -422,6 +422,18 @@
   padding-left: 40px;
 }
 
+.hamburger-subgroup-title {
+  padding: 10px 25px 4px;
+  font-size: 11px;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  color: #96305a;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  margin: 0;
+  border-top: 1px solid #eee;
+}
+
 /* ============================== */
 /*  MOBILE SEARCH BAR (expansível) */
 /* ============================== */

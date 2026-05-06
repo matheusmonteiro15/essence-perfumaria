@@ -3,10 +3,18 @@ import { useState, useEffect } from "react"
 import ProductCard from "../components/ProductCard"
 import api from "../services/api"
 
+const PRODUTOS_POR_PAGINA = 12
+
 function Category() {
   const { categoria } = useParams()
   const [produtosFiltrados, setProdutosFiltrados] = useState([])
   const [loading, setLoading] = useState(true)
+  const [visiveis, setVisiveis] = useState(PRODUTOS_POR_PAGINA)
+
+  // Reseta a quantidade visível ao trocar de categoria
+  useEffect(() => {
+    setVisiveis(PRODUTOS_POR_PAGINA)
+  }, [categoria])
 
   useEffect(() => {
     async function buscar() {
@@ -21,15 +29,13 @@ function Category() {
         const targetSlug = gerarSlug(categoria)
 
         // Slugs de grupo do menu horizontal — mostrar todos os produtos
-        const gruposGerais = ["perfumaria", "marcas", "familia-olfativa", "promocao"]
+        const gruposGerais = ["perfumes", "perfumaria", "marcas", "familia-olfativa", "promocao"]
         
         let filtrado
 
         if (gruposGerais.includes(targetSlug)) {
-          // Para categorias gerais, mostrar todos os produtos
           filtrado = response.data
         } else {
-          // Para categorias específicas, filtrar normalmente
           filtrado = response.data.filter((p) => {
             const cat = gerarSlug(p.categoria)
             const mar = gerarSlug(p.marca)
@@ -50,6 +56,9 @@ function Category() {
     buscar()
   }, [categoria])
 
+  const produtosNaTela = produtosFiltrados.slice(0, visiveis)
+  const temMais = visiveis < produtosFiltrados.length
+
   return (
     <section className="products-section">
       <h2>{categoria.replaceAll("-", " ").replace(/\b\w/g, l => l.toUpperCase())}</h2>
@@ -59,11 +68,49 @@ function Category() {
       ) : produtosFiltrados.length === 0 ? (
         <p>Nenhum produto encontrado nessa categoria.</p>
       ) : (
-        <div className="products-grid">
-          {produtosFiltrados.map((produto) => (
-            <ProductCard key={produto.id} {...produto} />
-          ))}
-        </div>
+        <>
+          <p style={{ color: '#666', fontSize: '14px', marginBottom: '20px' }}>
+            {produtosFiltrados.length} {produtosFiltrados.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
+          </p>
+          <div className="products-grid">
+            {produtosNaTela.map((produto) => (
+              <ProductCard key={produto.id} {...produto} />
+            ))}
+          </div>
+
+          {temMais && (
+            <div style={{ textAlign: 'center', marginTop: '35px' }}>
+              <button
+                onClick={() => setVisiveis(prev => prev + PRODUTOS_POR_PAGINA)}
+                style={{
+                  padding: '14px 40px',
+                  backgroundColor: 'transparent',
+                  color: '#333',
+                  border: '2px solid #333',
+                  borderRadius: '30px',
+                  cursor: 'pointer',
+                  fontFamily: "'Times New Roman', Times, serif",
+                  fontSize: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#96305a'
+                  e.target.style.color = 'white'
+                  e.target.style.borderColor = '#96305a'
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = 'transparent'
+                  e.target.style.color = '#333'
+                  e.target.style.borderColor = '#333'
+                }}
+              >
+                Carregar Mais ({produtosFiltrados.length - visiveis} restantes)
+              </button>
+            </div>
+          )}
+        </>
       )}
     </section>
   )

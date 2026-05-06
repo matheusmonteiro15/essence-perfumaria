@@ -27,14 +27,25 @@ function Header() {
   }
 
   const [menus, setMenus] = useState([
-    { titulo: "Perfumaria", opcoes: [] },
-    { titulo: "Família Olfativa", opcoes: [] },
-    { titulo: "Marcas", opcoes: [] },
+    { titulo: "Perfumes", subgrupos: [
+      { subtitulo: "Perfumaria", opcoes: [] },
+      { subtitulo: "Família Olfativa", opcoes: [] },
+      { subtitulo: "Marcas", opcoes: [] },
+    ]},
     { titulo: "Corpo e Banho", opcoes: [] },
     { titulo: "Presentes", opcoes: [] },
     { titulo: "Promoção", opcoes: [] },
     { titulo: "Perfume Ideal", opcoes: [{ nome: "Fazer Quiz", slug: "quiz", rota: "/quiz" }] },
   ])
+
+  // Abas do menu horizontal simplificado
+  const abasHorizontais = [
+    { titulo: "Perfumes", rota: "/categoria/perfumes" },
+    { titulo: "Corpo e Banho", rota: "/categoria/corpo-e-banho" },
+    { titulo: "Presentes", rota: "/categoria/presentes" },
+    { titulo: "Promoção", rota: "/categoria/promocao" },
+    { titulo: "Perfume Ideal", rota: "/quiz" },
+  ]
 
   useEffect(() => {
     async function carregarDados() {
@@ -49,16 +60,21 @@ function Header() {
         const data = menuResponse.data
         setMenus([
           {
-            titulo: "Perfumaria",
-            opcoes: data.categorias.filter(c => c.toLowerCase() !== "indie").map(c => ({ nome: c, slug: gerarSlug(c) }))
-          },
-          {
-            titulo: "Família Olfativa",
-            opcoes: data.familias.map(f => ({ nome: f, slug: gerarSlug(f) }))
-          },
-          {
-            titulo: "Marcas",
-            opcoes: data.marcas.map(m => ({ nome: m, slug: gerarSlug(m) }))
+            titulo: "Perfumes",
+            subgrupos: [
+              {
+                subtitulo: "Perfumaria",
+                opcoes: data.categorias.filter(c => c.toLowerCase() !== "indie").map(c => ({ nome: c, slug: gerarSlug(c) }))
+              },
+              {
+                subtitulo: "Família Olfativa",
+                opcoes: data.familias.map(f => ({ nome: f, slug: gerarSlug(f) }))
+              },
+              {
+                subtitulo: "Marcas",
+                opcoes: data.marcas.map(m => ({ nome: m, slug: gerarSlug(m) }))
+              },
+            ]
           },
           {
             titulo: "Corpo e Banho",
@@ -301,13 +317,13 @@ function Header() {
 
       {/* ===== MENU HORIZONTAL (abas simplificadas — sempre visível) ===== */}
       <nav className="menu-horizontal">
-        {menus.map((menu) => (
+        {abasHorizontais.map((aba) => (
           <Link
-            key={menu.titulo}
-            to={menu.titulo === "Perfume Ideal" ? "/quiz" : `/categoria/${gerarSlug(menu.titulo)}`}
+            key={aba.titulo}
+            to={aba.rota}
             className="menu-horizontal-link"
           >
-            {menu.titulo}
+            {aba.titulo}
           </Link>
         ))}
       </nav>
@@ -334,15 +350,32 @@ function Header() {
 
               {submenuAberto === menu.titulo && (
                 <div className="hamburger-submenu">
-                  {menu.opcoes.map((opcao) => (
-                    <Link
-                      key={opcao.slug}
-                      to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
-                      onClick={() => setMenuAberto(false)}
-                    >
-                      {opcao.nome}
-                    </Link>
-                  ))}
+                  {/* Menus com subgrupos (ex: Perfumes) */}
+                  {menu.subgrupos ? menu.subgrupos.map((grupo) => (
+                    <div key={grupo.subtitulo}>
+                      <p className="hamburger-subgroup-title">{grupo.subtitulo}</p>
+                      {grupo.opcoes.map((opcao) => (
+                        <Link
+                          key={opcao.slug}
+                          to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                          onClick={() => setMenuAberto(false)}
+                        >
+                          {opcao.nome}
+                        </Link>
+                      ))}
+                    </div>
+                  )) : (
+                    /* Menus simples (ex: Corpo e Banho) */
+                    menu.opcoes.map((opcao) => (
+                      <Link
+                        key={opcao.slug}
+                        to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                        onClick={() => setMenuAberto(false)}
+                      >
+                        {opcao.nome}
+                      </Link>
+                    ))
+                  )}
                 </div>
               )}
             </div>
@@ -359,14 +392,25 @@ function Header() {
             </button>
 
             <div className="dropdown">
-              {menu.opcoes.map((opcao) => (
-                <Link
-                  key={opcao.slug}
-                  to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
-                >
-                  {opcao.nome}
-                </Link>
-              ))}
+              {menu.subgrupos ? menu.subgrupos.map((grupo) => (
+                grupo.opcoes.map((opcao) => (
+                  <Link
+                    key={opcao.slug}
+                    to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                  >
+                    {opcao.nome}
+                  </Link>
+                ))
+              )) : (
+                menu.opcoes.map((opcao) => (
+                  <Link
+                    key={opcao.slug}
+                    to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                  >
+                    {opcao.nome}
+                  </Link>
+                ))
+              )}
             </div>
           </div>
         ))}
