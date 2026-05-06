@@ -1,5 +1,7 @@
 .products-section {
   padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .products-section h2 {
@@ -9,33 +11,33 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 25px;
 }
 
-@media (max-width: 900px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+  .products-section {
+    padding: 20px 15px;
   }
 
-  .search {
-    width: 60%;
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 }
 
-@media (max-width: 600px) {
-  .products-section {
-    padding: 20px;
-  }
-
+@media (max-width: 480px) {
   .products-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
 
 /* PÁGINA DO PRODUTO */
 .product-page {
   padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .product-container {
@@ -84,7 +86,7 @@
 
 /* PERFIL */
 .profile-page {
-  padding: 40px;
+  padding: 40px 20px;
   background-color: #f8f8f8;
 }
 
@@ -158,19 +160,27 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .info-grid {
     grid-template-columns: 1fr;
   }
 
   .profile-page {
-    padding: 20px;
+    padding: 15px 12px;
+  }
+
+  .profile-container h1 {
+    font-size: 24px;
+  }
+
+  .profile-box {
+    padding: 18px;
   }
 }
 
 /* SACOLA */
 .bag-page {
-  padding: 40px;
+  padding: 40px 20px;
   background-color: #f8f8f8;
 }
 
@@ -340,7 +350,15 @@
   padding: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
+  .bag-page {
+    padding: 20px 12px;
+  }
+
+  .bag-container h1 {
+    font-size: 24px;
+  }
+
   .bag-content {
     grid-template-columns: 1fr;
   }
@@ -348,6 +366,12 @@
   .bag-product {
     flex-direction: column;
     text-align: center;
+    padding: 16px;
+  }
+
+  .bag-product img {
+    width: 90px;
+    height: 120px;
   }
 
   .bag-info p {
@@ -360,6 +384,7 @@
 
   .bag-summary {
     position: static;
+    padding: 18px;
   }
 }
 
@@ -435,13 +460,17 @@
   color: #333;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .checkout-form {
     grid-template-columns: 1fr;
   }
 
   .checkout-steps {
     flex-wrap: wrap;
+  }
+
+  .checkout-page {
+    padding: 20px 12px;
   }
 }
 
@@ -456,8 +485,20 @@
   height: auto;
   max-height: 450px;
   object-fit: cover;
-  object-position: top; /* Garante que o topo (tampa do perfume) não seja cortado */
+  object-position: top;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .banner img {
+    max-height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner img {
+    max-height: 180px;
+  }
 }
 
 .remove-favorite {
@@ -497,9 +538,43 @@
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr; /* 🔥 remove galeria e aumenta imagem */
+  grid-template-columns: 1.5fr 1fr;
   gap: 50px;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .product-zoom-container {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 0 15px;
+  }
+
+  .product-main-image img {
+    height: 350px !important;
+  }
+
+  .product-detail-info {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .product-detail-info h1 {
+    font-size: 20px;
+  }
+
+  .product-detail-price {
+    font-size: 26px;
+  }
+
+  .sacola-button {
+    width: 100%;
+  }
+
+  .breadcrumb {
+    padding: 0 15px;
+    font-size: 12px;
+  }
 }
 .product-gallery {
   display: flex;
@@ -611,10 +686,6 @@
 }
 
 @media (max-width: 900px) {
-  .product-zoom-container {
-    grid-template-columns: 1fr;
-  }
-
   .product-gallery {
     flex-direction: row;
     justify-content: center;
@@ -743,6 +814,26 @@
   min-height: 70vh;
 }
 
+@media (max-width: 480px) {
+  .quiz-page {
+    padding: 25px 12px;
+  }
+
+  .quiz-card h1,
+  .quiz-result h1 {
+    font-size: 24px;
+  }
+
+  .quiz-card h2 {
+    font-size: 18px;
+  }
+
+  .quiz-options button {
+    padding: 14px;
+    font-size: 14px;
+  }
+}
+
 .quiz-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -830,8 +921,18 @@
 }
 
 .admin-page {
-  padding: 40px;
+  padding: 40px 20px;
   background-color: #f8f8f8;
+}
+
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 20px 12px;
+  }
+
+  .admin-box {
+    padding: 18px;
+  }
 }
 
 .admin-container {

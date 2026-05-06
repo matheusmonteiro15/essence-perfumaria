@@ -12,6 +12,7 @@ function Header() {
   const [busca, setBusca] = useState("")
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false)
   const [catalogo, setCatalogo] = useState([])
+  const [menuAberto, setMenuAberto] = useState(false)
 
   function gerarSlug(texto) {
     if (!texto) return ""
@@ -120,13 +121,13 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="top-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <div className="top-bar">
         <Link to="/">
           <img src={logo} alt="Essence" className="logo-img" />
         </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-          <form className="search-form" onSubmit={pesquisar} style={{ position: 'relative', width: '500px', display: 'flex', alignItems: 'center' }}>
+        <div className="header-right">
+          <form className="search-form" onSubmit={pesquisar}>
             <span style={{ position: 'absolute', left: '15px', color: '#000', display: 'flex', alignItems: 'center' }}>
               {/* Lupa SVG */}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -179,7 +180,7 @@ function Header() {
             )}
           </form>
 
-          <div className="icons" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div className="icons">
             <Link to="/favoritos" className="cart-icon-container">
               <svg 
                 className="icon-img" 
@@ -259,7 +260,11 @@ function Header() {
         </div>
       </div>
 
-      <nav className="menu">
+      <button className="hamburger" onClick={() => setMenuAberto(!menuAberto)} aria-label="Menu">
+        {menuAberto ? '✕' : '☰'}
+      </button>
+
+      <nav className={`menu ${menuAberto ? 'menu-open' : ''}`}>
         {menus.map((menu) => (
           <div className="menu-item" key={menu.titulo}>
             <button className="menu-button" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
@@ -271,6 +276,7 @@ function Header() {
                 <Link
                   key={opcao.slug}
                   to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                  onClick={() => setMenuAberto(false)}
                 >
                   {opcao.nome}
                 </Link>

@@ -192,3 +192,48 @@
   object-fit: contain;
   filter: brightness(0); /* transforma o ícone da sacola em preto */
 }
+
+/* RESPONSIVO — PRODUCT CARD MOBILE */
+@media (max-width: 768px) {
+  .product-card.canvas-product-card {
+    min-height: 320px;
+    padding: 12px;
+  }
+
+  .canvas-product-card .canvas-product-image {
+    height: 150px;
+  }
+
+  .canvas-product-card .canvas-brand {
+    font-size: 12px;
+  }
+
+  .canvas-product-card .canvas-nome {
+    font-size: 10px;
+  }
+
+  .canvas-product-card .canvas-price {
+    font-size: 14px !important;
+  }
+
+  .canvas-product-card .canvas-bag-button {
+    width: 38px;
+    height: 34px;
+  }
+
+  .canvas-bag-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card.canvas-product-card {
+    min-height: 280px;
+    padding: 10px;
+  }
+
+  .canvas-product-card .canvas-product-image {
+    height: 140px;
+  }
+}

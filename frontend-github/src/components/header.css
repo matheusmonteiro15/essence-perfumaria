@@ -6,35 +6,53 @@
 
 /* TOPO */
 .top-bar {
-  height: 82px; /* controla altura elegante */
+  height: 82px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 48px;
   background-color: white;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* LOGO */
 .logo-img {
-  width: 200px; /* maior e elegante */
-  max-height: 70px; /* evita esticar demais */
+  width: 200px;
+  max-height: 70px;
   object-fit: contain;
   display: block;
 }
 
+/* HEADER RIGHT (busca + ícones) */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
 /* BUSCA */
-.search {
-  width: 40%;
-  padding: 10px 16px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
+.search-form {
+  width: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-form .search {
+  width: 100%;
+  padding: 10px 40px;
+  border-radius: 8px;
+  border: 1px solid #000;
+  font-size: 14px;
+  outline: none;
 }
 
 /* ÍCONES */
 .icons {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .icon-img {
@@ -45,7 +63,6 @@
   transition: all 0.3s ease;
 }
 
-/* Deixa o ícone com a cor primária da marca (#96305a) quando logado */
 .icon-img.logged-in {
   filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(314deg) brightness(86%) contrast(85%);
 }
@@ -56,15 +73,27 @@
   font-size: 22px;
 }
 
+/* HAMBURGER — escondido no desktop */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #333;
+  padding: 8px 16px;
+}
+
 /* MENU */
 .menu {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 32px;
   background-color: #d8b8c8;
   padding: 12px 48px;
   border-top: 1px solid #555;
   border-bottom: 1px solid #555;
+  max-width: 100%;
 }
 
 /* ITEM */
@@ -121,40 +150,7 @@
   font-weight: bold;
 }
 
-/* RESPONSIVO */
-@media (max-width: 800px) {
-  .top-bar {
-    height: auto;
-    flex-direction: column;
-    gap: 12px;
-    padding: 15px;
-  }
-
-  .search {
-    width: 90%;
-  }
-
-  .menu {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .dropdown {
-    position: static;
-    box-shadow: none;
-    border-radius: 10px;
-  }
-}
-
-.search-form {
-  width: 40%;
-  position: relative;
-}
-
-.search-form .search {
-  width: 100%;
-}
-
+/* BUSCA SUGESTÕES */
 .search-suggestions {
   position: absolute;
   top: 45px;
@@ -211,7 +207,7 @@
   font-size: 14px;
 }
 
-/* 🔥 ESTILOS DO CART BADGE */
+/* CART BADGE */
 .cart-icon-container {
   position: relative;
   display: inline-block;
@@ -228,4 +224,152 @@
   font-size: 12px;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ============================================ */
+/*            RESPONSIVO — TABLET               */
+/* ============================================ */
+@media (max-width: 1024px) {
+  .top-bar {
+    padding: 0 20px;
+  }
+
+  .search-form {
+    width: 350px;
+  }
+
+  .menu {
+    gap: 18px;
+    padding: 12px 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* ============================================ */
+/*            RESPONSIVO — MOBILE               */
+/* ============================================ */
+@media (max-width: 768px) {
+  .top-bar {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px 15px;
+  }
+
+  .logo-img {
+    width: 130px;
+    max-height: 50px;
+  }
+
+  .header-right {
+    flex-direction: row;
+    gap: 12px;
+    order: 0;
+  }
+
+  .search-form {
+    width: 180px;
+    order: 1;
+  }
+
+  .search-form .search {
+    padding: 8px 35px;
+    font-size: 12px;
+  }
+
+  .icons {
+    gap: 14px;
+    order: 2;
+  }
+
+  .icon-img {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* Mostrar botão hamburger */
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    z-index: 20;
+  }
+
+  /* Menu escondido por padrão no mobile */
+  .menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border-top: none;
+  }
+
+  .menu.menu-open {
+    display: flex;
+  }
+
+  .menu-item {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .menu-button {
+    width: 100%;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  .dropdown {
+    position: static;
+    min-width: auto;
+    border: none;
+    padding: 0 0 10px 20px;
+    box-shadow: none;
+    background-color: #d8b8c8;
+  }
+
+  .menu-item:hover .dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .dropdown a {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================ */
+/*       RESPONSIVO — MOBILE PEQUENO            */
+/* ============================================ */
+@media (max-width: 480px) {
+  .top-bar {
+    padding: 10px 12px;
+  }
+
+  .logo-img {
+    width: 100px;
+    max-height: 40px;
+  }
+
+  .search-form {
+    width: 140px;
+  }
+
+  .search-form .search {
+    padding: 7px 30px;
+    font-size: 11px;
+  }
+
+  .icons {
+    gap: 10px;
+  }
+
+  .icon-img {
+    width: 20px;
+    height: 20px;
+  }
 }
