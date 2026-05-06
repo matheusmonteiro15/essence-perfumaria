@@ -917,6 +917,8 @@
   padding: 15px;
   border-radius: 12px;
   overflow-x: auto;
+}
+
 /* ESTILOS ESPECÍFICOS LOGIN CANVAS */
 .auth-page.canvas-style {
   background-color: #fff;
