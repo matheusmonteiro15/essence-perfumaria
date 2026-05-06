@@ -142,10 +142,10 @@ function Header() {
     setSubmenuAberto(null)
   }, [location.pathname])
 
-  // Formulario de busca reutilizável
-  function SearchForm({ className }) {
+  // Helper que retorna JSX do formulário de busca (NÃO é um componente React)
+  function renderSearchForm(extraClass) {
     return (
-      <form className={`search-form ${className || ''}`} onSubmit={pesquisar}>
+      <form className={`search-form ${extraClass || ''}`} onSubmit={pesquisar}>
         <span className="search-lupa">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
@@ -198,8 +198,8 @@ function Header() {
     )
   }
 
-  // Ícones reutilizáveis
-  function IconsGroup() {
+  // Helper que retorna JSX dos ícones (NÃO é um componente React)
+  function renderIcons() {
     return (
       <>
         <Link to="/favoritos" className="cart-icon-container">
@@ -290,9 +290,9 @@ function Header() {
 
         {/* DESKTOP: Search + Icons */}
         <div className="header-right desktop-only">
-          <SearchForm />
+          {renderSearchForm()}
           <div className="icons">
-            <IconsGroup />
+            {renderIcons()}
           </div>
         </div>
 
@@ -304,14 +304,15 @@ function Header() {
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
           </button>
-          <IconsGroup />
+          {renderIcons()}
         </div>
       </div>
+
 
       {/* ===== MOBILE: Barra de busca expansível ===== */}
       {buscaMobileAberta && (
         <div className="mobile-search-bar mobile-only">
-          <SearchForm className="mobile-search-form" />
+          {renderSearchForm("mobile-search-form")}
         </div>
       )}
 
