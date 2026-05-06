@@ -38,7 +38,7 @@ function Header() {
     { titulo: "Perfume Ideal", opcoes: [{ nome: "Fazer Quiz", slug: "quiz", rota: "/quiz" }] },
   ])
 
-  // Abas do menu horizontal simplificado
+  // Abas do menu horizontal simplificado (MOBILE)
   const abasHorizontais = [
     { titulo: "Perfumes", rota: "/categoria/perfumes" },
     { titulo: "Corpo e Banho", rota: "/categoria/corpo-e-banho" },
@@ -46,6 +46,17 @@ function Header() {
     { titulo: "Promoção", rota: "/categoria/promocao" },
     { titulo: "Perfume Ideal", rota: "/quiz" },
   ]
+
+  // Menu desktop com abas separadas (Perfumaria, Família, Marcas individualmente)
+  const [menusDesktop, setMenusDesktop] = useState([
+    { titulo: "Perfumaria", opcoes: [] },
+    { titulo: "Família Olfativa", opcoes: [] },
+    { titulo: "Marcas", opcoes: [] },
+    { titulo: "Corpo e Banho", opcoes: [] },
+    { titulo: "Presentes", opcoes: [] },
+    { titulo: "Promoção", opcoes: [] },
+    { titulo: "Perfume Ideal", opcoes: [{ nome: "Fazer Quiz", slug: "quiz", rota: "/quiz" }] },
+  ])
 
   useEffect(() => {
     async function carregarDados() {
@@ -75,6 +86,40 @@ function Header() {
                 opcoes: data.marcas.map(m => ({ nome: m, slug: gerarSlug(m) }))
               },
             ]
+          },
+          {
+            titulo: "Corpo e Banho",
+            opcoes: [
+              { nome: "Sabonetes", slug: "sabonetes" },
+              { nome: "Hidratantes", slug: "hidratantes" },
+            ]
+          },
+          {
+            titulo: "Presentes",
+            opcoes: [
+              { nome: "Kits", slug: "kits" },
+              { nome: "Até R$100", slug: "ate-100" },
+            ]
+          },
+          {
+            titulo: "Perfume Ideal",
+            opcoes: [{ nome: "Fazer Quiz", slug: "quiz", rota: "/quiz" }],
+          }
+        ])
+
+        // Menu desktop com abas separadas
+        setMenusDesktop([
+          {
+            titulo: "Perfumaria",
+            opcoes: data.categorias.filter(c => c.toLowerCase() !== "indie").map(c => ({ nome: c, slug: gerarSlug(c) }))
+          },
+          {
+            titulo: "Família Olfativa",
+            opcoes: data.familias.map(f => ({ nome: f, slug: gerarSlug(f) }))
+          },
+          {
+            titulo: "Marcas",
+            opcoes: data.marcas.map(m => ({ nome: m, slug: gerarSlug(m) }))
           },
           {
             titulo: "Corpo e Banho",
@@ -386,32 +431,21 @@ function Header() {
 
       {/* ===== DESKTOP: Menu com hover dropdowns (escondido no mobile) ===== */}
       <nav className="menu-desktop desktop-only">
-        {menus.map((menu) => (
+        {menusDesktop.map((menu) => (
           <div className="menu-item" key={menu.titulo}>
             <button className="menu-button">
               {menu.titulo} <span style={{ fontSize: '10px' }}>∨</span>
             </button>
 
             <div className="dropdown">
-              {menu.subgrupos ? menu.subgrupos.map((grupo) => (
-                grupo.opcoes.map((opcao) => (
-                  <Link
-                    key={opcao.slug}
-                    to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
-                  >
-                    {opcao.nome}
-                  </Link>
-                ))
-              )) : (
-                menu.opcoes.map((opcao) => (
-                  <Link
-                    key={opcao.slug}
-                    to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
-                  >
-                    {opcao.nome}
-                  </Link>
-                ))
-              )}
+              {menu.opcoes.map((opcao) => (
+                <Link
+                  key={opcao.slug}
+                  to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                >
+                  {opcao.nome}
+                </Link>
+              ))}
             </div>
           </div>
         ))}
