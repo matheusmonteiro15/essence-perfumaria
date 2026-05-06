@@ -20,14 +20,26 @@ function Category() {
 
         const targetSlug = gerarSlug(categoria)
 
-        const filtrado = response.data.filter((p) => {
-          const cat = gerarSlug(p.categoria)
-          const mar = gerarSlug(p.marca)
-          const fam = gerarSlug(p.familia_olfativa)
-          
-          return cat === targetSlug || mar === targetSlug || fam === targetSlug ||
-                 cat.includes(targetSlug) || mar.includes(targetSlug) || fam.includes(targetSlug)
-        })
+        // Slugs de grupo do menu horizontal — mostrar todos os produtos
+        const gruposGerais = ["perfumaria", "marcas", "familia-olfativa", "promocao"]
+        
+        let filtrado
+
+        if (gruposGerais.includes(targetSlug)) {
+          // Para categorias gerais, mostrar todos os produtos
+          filtrado = response.data
+        } else {
+          // Para categorias específicas, filtrar normalmente
+          filtrado = response.data.filter((p) => {
+            const cat = gerarSlug(p.categoria)
+            const mar = gerarSlug(p.marca)
+            const fam = gerarSlug(p.familia_olfativa)
+            
+            return cat === targetSlug || mar === targetSlug || fam === targetSlug ||
+                   cat.includes(targetSlug) || mar.includes(targetSlug) || fam.includes(targetSlug)
+          })
+        }
+
         setProdutosFiltrados(filtrado)
       } catch (e) {
         console.error(e)
