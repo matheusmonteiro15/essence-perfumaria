@@ -13,6 +13,8 @@ function Header() {
   const [mostrarSugestoes, setMostrarSugestoes] = useState(false)
   const [catalogo, setCatalogo] = useState([])
   const [menuAberto, setMenuAberto] = useState(false)
+  const [buscaMobileAberta, setBuscaMobileAberta] = useState(false)
+  const [submenuAberto, setSubmenuAberto] = useState(null)
 
   function gerarSlug(texto) {
     if (!texto) return ""
@@ -23,6 +25,7 @@ function Header() {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
   }
+
   const [menus, setMenus] = useState([
     { titulo: "Perfumaria", opcoes: [] },
     { titulo: "Família Olfativa", opcoes: [] },
@@ -33,7 +36,6 @@ function Header() {
     { titulo: "Perfume Ideal", opcoes: [{ nome: "Fazer Quiz", slug: "quiz", rota: "/quiz" }] },
   ])
 
-  // Busca o catálogo inteiro e os filtros do menu
   useEffect(() => {
     async function carregarDados() {
       try {
@@ -85,7 +87,6 @@ function Header() {
     carregarDados()
   }, [])
 
-  // Verifica se o usuário está logado
   const isLogado = !!localStorage.getItem("usuarioLogado")
   const linkUsuario = isLogado ? "/perfil" : "/login"
 
@@ -108,6 +109,7 @@ function Header() {
       navigate(`/busca?q=${encodeURIComponent(busca.trim())}`)
       setBusca("")
       setMostrarSugestoes(false)
+      setBuscaMobileAberta(false)
     }
   }
 
@@ -115,159 +117,244 @@ function Header() {
     navigate(`/produto/${id}`)
     setBusca("")
     setMostrarSugestoes(false)
+    setBuscaMobileAberta(false)
   }
 
+  // Fecha o menu hamburguer ao navegar
+  useEffect(() => {
+    setMenuAberto(false)
+    setSubmenuAberto(null)
+  }, [location.pathname])
 
+  // Formulario de busca reutilizável
+  function SearchForm({ className }) {
+    return (
+      <form className={`search-form ${className || ''}`} onSubmit={pesquisar}>
+        <span className="search-lupa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </span>
+        <input
+          className="search"
+          type="text"
+          placeholder="Buscar perfumes..."
+          value={busca}
+          onChange={(event) => {
+            setBusca(event.target.value)
+            setMostrarSugestoes(true)
+          }}
+          onFocus={() => setMostrarSugestoes(true)}
+        />
+        <button 
+          type="button" 
+          onClick={() => {
+            setBusca('')
+            setMostrarSugestoes(false)
+          }} 
+          className="search-clear">
+          ✕
+        </button>
+
+        {mostrarSugestoes && busca.trim() !== "" && (
+          <div className="search-suggestions">
+            {sugestoes.length === 0 ? (
+              <p>Nenhum perfume encontrado</p>
+            ) : (
+              sugestoes.slice(0, 5).map((produto) => (
+                <button
+                  type="button"
+                  key={produto.id}
+                  onClick={() => abrirProduto(produto.id)}
+                >
+                  <img src={produto.imagem} alt={produto.nome} />
+                  <span>
+                    <strong>{produto.nome}</strong>
+                    <small>{produto.marca}</small>
+                  </span>
+                </button>
+              ))
+            )}
+          </div>
+        )}
+      </form>
+    )
+  }
+
+  // Ícones reutilizáveis
+  function IconsGroup() {
+    return (
+      <>
+        <Link to="/favoritos" className="cart-icon-container">
+          <svg 
+            className="icon-img" 
+            viewBox="0 0 24 24" 
+            fill={location.pathname === '/favoritos' ? "black" : "none"} 
+            stroke="black" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            style={{ display: 'block' }}
+          >
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          {quantidadeFavoritos > 0 && <span className="cart-badge">{quantidadeFavoritos}</span>}
+        </Link>
+
+        <Link to={linkUsuario}>
+          <svg 
+            className={`icon-img ${isLogado ? 'logged-in' : ''}`} 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="black" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            title={isLogado ? "Meu Perfil" : "Fazer Login"}
+            style={{ display: 'block' }}
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </Link>
+
+        <Link to="/sacola" className="cart-icon-container" style={{ position: 'relative' }}>
+          <svg 
+            className="icon-img" 
+            viewBox="0 0 24 24" 
+            fill={location.pathname === '/sacola' ? "black" : "none"} 
+            stroke="black" 
+            strokeWidth="2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            style={{ display: 'block' }}
+          >
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          {quantidadeItens > 0 && <span className="cart-badge">{quantidadeItens}</span>}
+        </Link>
+
+        {isLogado && (
+          <button 
+            onClick={() => {
+              localStorage.removeItem("usuarioLogado");
+              localStorage.removeItem("token");
+              window.location.href = "/";
+            }}
+            title="Sair"
+            className="logout-btn"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+          </button>
+        )}
+      </>
+    )
+  }
 
   return (
     <header className="header">
+      {/* ===== TOP BAR ===== */}
       <div className="top-bar">
-        <Link to="/">
+        {/* MOBILE: Hamburger à esquerda */}
+        <button className="hamburger" onClick={() => setMenuAberto(!menuAberto)} aria-label="Menu">
+          {menuAberto ? '✕' : '☰'}
+        </button>
+
+        {/* Logo */}
+        <Link to="/" className="logo-link">
           <img src={logo} alt="Essence" className="logo-img" />
         </Link>
 
-        <div className="header-right">
-          <form className="search-form" onSubmit={pesquisar}>
-            <span style={{ position: 'absolute', left: '15px', color: '#000', display: 'flex', alignItems: 'center' }}>
-              {/* Lupa SVG */}
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-            </span>
-            <input
-              className="search"
-              type="text"
-              placeholder="Buscar perfumes..."
-              value={busca}
-              onChange={(event) => {
-                setBusca(event.target.value)
-                setMostrarSugestoes(true)
-              }}
-              onFocus={() => setMostrarSugestoes(true)}
-              style={{ width: '100%', padding: '10px 40px', borderRadius: '8px', border: '1px solid #000', fontSize: '14px', outline: 'none' }}
-            />
-            <button 
-              type="button" 
-              onClick={() => {
-                setBusca('')
-                setMostrarSugestoes(false)
-              }} 
-              style={{ position: 'absolute', right: '15px', background: 'none', border: 'none', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold', color: '#000' }}>
-              ✕
-            </button>
-
-            {mostrarSugestoes && busca.trim() !== "" && (
-              <div className="search-suggestions">
-                {sugestoes.length === 0 ? (
-                  <p>Nenhum perfume encontrado</p>
-                ) : (
-                  sugestoes.slice(0, 5).map((produto) => (
-                    <button
-                      type="button"
-                      key={produto.id}
-                      onClick={() => abrirProduto(produto.id)}
-                    >
-                      <img src={produto.imagem} alt={produto.nome} />
-                      <span>
-                        <strong>{produto.nome}</strong>
-                        <small>{produto.marca}</small>
-                      </span>
-                    </button>
-                  ))
-                )}
-              </div>
-            )}
-          </form>
-
+        {/* DESKTOP: Search + Icons */}
+        <div className="header-right desktop-only">
+          <SearchForm />
           <div className="icons">
-            <Link to="/favoritos" className="cart-icon-container">
-              <svg 
-                className="icon-img" 
-                viewBox="0 0 24 24" 
-                fill={location.pathname === '/favoritos' ? "black" : "none"} 
-                stroke="black" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                style={{ display: 'block' }}
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-              {quantidadeFavoritos > 0 && <span className="cart-badge">{quantidadeFavoritos}</span>}
-            </Link>
-
-            <Link to={linkUsuario}>
-              <svg 
-                className={`icon-img ${isLogado ? 'logged-in' : ''}`} 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="black" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                title={isLogado ? "Meu Perfil" : "Fazer Login"}
-                style={{ display: 'block' }}
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-            </Link>
-
-            <Link to="/sacola" className="cart-icon-container" style={{ position: 'relative' }}>
-              <svg 
-                className="icon-img" 
-                viewBox="0 0 24 24" 
-                fill={location.pathname === '/sacola' ? "black" : "none"} 
-                stroke="black" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                style={{ display: 'block' }}
-              >
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              {quantidadeItens > 0 && <span className="cart-badge">{quantidadeItens}</span>}
-            </Link>
-
-            {isLogado && (
-              <button 
-                onClick={() => {
-                  localStorage.removeItem("usuarioLogado");
-                  localStorage.removeItem("token");
-                  window.location.href = "/";
-                }}
-                title="Sair"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: '#666',
-                  display: 'flex',
-                  alignItems: 'center'
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                  <polyline points="16 17 21 12 16 7"></polyline>
-                  <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-              </button>
-            )}
+            <IconsGroup />
           </div>
+        </div>
+
+        {/* MOBILE: Lupa toggle + Icons */}
+        <div className="mobile-icons mobile-only">
+          <button className="search-toggle" onClick={() => setBuscaMobileAberta(!buscaMobileAberta)} aria-label="Buscar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+          <IconsGroup />
         </div>
       </div>
 
-      <button className="hamburger" onClick={() => setMenuAberto(!menuAberto)} aria-label="Menu">
-        {menuAberto ? '✕' : '☰'}
-      </button>
+      {/* ===== MOBILE: Barra de busca expansível ===== */}
+      {buscaMobileAberta && (
+        <div className="mobile-search-bar mobile-only">
+          <SearchForm className="mobile-search-form" />
+        </div>
+      )}
 
-      <nav className={`menu ${menuAberto ? 'menu-open' : ''}`}>
+      {/* ===== MENU HORIZONTAL (abas simplificadas — sempre visível) ===== */}
+      <nav className="menu-horizontal">
+        {menus.map((menu) => (
+          <Link
+            key={menu.titulo}
+            to={menu.titulo === "Perfume Ideal" ? "/quiz" : `/categoria/${gerarSlug(menu.titulo)}`}
+            className="menu-horizontal-link"
+          >
+            {menu.titulo}
+          </Link>
+        ))}
+      </nav>
+
+      {/* ===== HAMBURGER OVERLAY (sidebar com subcategorias accordion) ===== */}
+      {menuAberto && <div className="hamburger-overlay" onClick={() => setMenuAberto(false)} />}
+      
+      <div className={`hamburger-panel ${menuAberto ? 'open' : ''}`}>
+        <div className="hamburger-header">
+          <img src={logo} alt="Essence" className="hamburger-logo" />
+          <button className="hamburger-close" onClick={() => setMenuAberto(false)}>✕</button>
+        </div>
+
+        <div className="hamburger-body">
+          {menus.map((menu) => (
+            <div className="hamburger-item" key={menu.titulo}>
+              <button
+                className="hamburger-category"
+                onClick={() => setSubmenuAberto(submenuAberto === menu.titulo ? null : menu.titulo)}
+              >
+                <span>{menu.titulo}</span>
+                <span className={`hamburger-arrow ${submenuAberto === menu.titulo ? 'open' : ''}`}>›</span>
+              </button>
+
+              {submenuAberto === menu.titulo && (
+                <div className="hamburger-submenu">
+                  {menu.opcoes.map((opcao) => (
+                    <Link
+                      key={opcao.slug}
+                      to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
+                      onClick={() => setMenuAberto(false)}
+                    >
+                      {opcao.nome}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== DESKTOP: Menu com hover dropdowns (escondido no mobile) ===== */}
+      <nav className="menu-desktop desktop-only">
         {menus.map((menu) => (
           <div className="menu-item" key={menu.titulo}>
-            <button className="menu-button" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <button className="menu-button">
               {menu.titulo} <span style={{ fontSize: '10px' }}>∨</span>
             </button>
 
@@ -276,7 +363,6 @@ function Header() {
                 <Link
                   key={opcao.slug}
                   to={opcao.rota ? opcao.rota : `/categoria/${opcao.slug}`}
-                  onClick={() => setMenuAberto(false)}
                 >
                   {opcao.nome}
                 </Link>
