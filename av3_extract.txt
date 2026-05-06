@@ -1,0 +1,646 @@
+Diretrizes do Projeto para a AV3 : Engenharia de 
+Software Aplicada  
+Disciplina:  Engenharia de Software Público -Alvo:  Alunos do Curso de Tecnologia da 
+Informação Metodologia:  Ágil (Framework Scrum) Tamanho do Grupo:  Máximo de 5 
+membros  
+ 
+1. Apresentação e Objetivo do Projeto  
+Bem -vindos ao Projeto Integrador da disciplina de Engenharia de Software! O objetivo 
+deste projeto é simular um ambiente real de desenvolvimento de software. Vocês 
+atuarão como uma equipe de engenharia responsável por conceber, documentar, 
+desenvolver e entregar uma solução tecnológica completa para um nicho de 
+mercado específico.  
+O projeto não se resume apenas a escrever código. Vocês deverão aplicar as 
+melhores práticas de Engenharia de Software, incluindo levantamento de requisitos, 
+modelagem arquitetural, gestão ágil e entregas contínuas.  
+1.1. Tema Sugerido: “Sistema de Gestão e Agendamento para Pequenos 
+Negócios”  
+Para garantir que todos tenham um escopo viável e comparável, o projeto deverá 
+focar em um nicho de mercado de pequenos negócios (ex: Barbearias, Clínicas de 
+Estética, Pet Shops, Oficinas Mecânicas, Consultórios).  
+O sistema deve permitir:  - Cadastro de clientes e profissionais. - Agendamento de 
+serviços com controle de horários e conflitos. - Painel de gestão (Dashboard) para o 
+dono do negócio visualizar faturamento e métricas. - Histórico de atendimentos.  
+Nota: O grupo pode propor outro nicho, desde que a complexidade técnica seja 
+equivalente e seja aprovado pelo professor na primeira semana.  
+ 
+2. Requisitos Técnicos Obrigatórios  
+A solução desenvolvida (podendo ser Web, Mobile ou Desktop) deve 
+obrigatoriamente contemplar as seguintes camadas:  
+1. Frontend (Interface do Usuário):  Uma interface gráfica funcional, amigável e 
+responsiva que permita a interação do usuário com o sistema.  
+
+---PAGE---
+
+2. Backend (Regras de Negócio):  Uma API ou servidor que processe as lógicas 
+do sistema, faça validações e garanta a segurança das operações.  
+3. Banco de Dados (Persistência):  Armazenamento de dados utilizando um 
+banco de dados Relacional (ex: MySQL, PostgreSQL) ou NoSQL (ex: MongoDB).  
+ 
+3. Metodologia de Trabalho: Scrum e Sprints Semanais  
+O projeto será conduzido utilizando o framework Scrum . O desenvolvimento não 
+será entregue de uma só vez no final do semestre, mas sim de forma incremental e 
+iterativa , através de Sprints Semanais . 
+3.1. Papéis no Grupo (Máximo 5 membros)  
+• Product Owner (PO):  Responsável por definir o que será feito (Product 
+Backlog) e garantir que o produto atenda às necessidades do cliente.  
+• Scrum Master:  Responsável por garantir que a equipe siga o Scrum, 
+removendo impedimentos e facilitando as reuniões.  
+• Desenvolvedores (Dev Team):  Responsáveis por construir o software (Front, 
+Back, BD) e elaborar a documentação técnica. (Como os grupos são 
+pequenos, os papéis podem ser acumulados, mas todos devem programar e 
+documentar).  
+3.2. Dinâmica das Sprints  
+• Duração:  1 semana.  
+• Início da Sprint:  Planejamento do que será feito na semana (Sprint Planning).  
+• Fim da Sprint:  Entrega de um incremento de software funcionando e 
+documentação atualizada.  
+ 
+4. Entregas e Apresentações Semanais (Sprint Review)  
+Ao final de cada semana , durante o horário de aula, ocorrerá a Sprint Review . 
+(Trata -se de uma reunião de apresentação do que foi desenvolvido na Sprint. )  
+Regras da Apresentação Semanal:   
+1. Participação Obrigatória:  todos  os membros do grupo devem falar 
+durante a apresentação. A nota é individual e coletiva.  
+2. Demonstração Prática:  o grupo deve mostrar o software rodando 
+(mesmo que incompleto, mostrando o que foi feito na semana). Não 
+serão aceitos apenas slides.  
+3. Atualização da Documentação:  os documentos de Engenharia de 
+Software devem ser atualizados e entregues a cada sprint.  
+
+---PAGE---
+
+4. Transparência:  o grupo deve relatar o que deu certo, o que deu errado 
+e quais foram os impedimentos da semana.  
+ 
+5. Cronograma de Entregas (Roadmap Sugerido)  
+O projeto será dividido em 8 Sprints (semanas) . Abaixo está o cronograma detalhado 
+do que deve ser entregue a cada semana, com os documentos específicos que 
+devem acompanhar a apresentação. Todos os documentos devem estar 
+versionados no repositório Git do projeto e ser apresentados durante a Sprint 
+Review.  
+Legenda de Documentos Entregáveis:  
+• [DOC -REQ]  = Documento de Requisitos do Projeto . 
+• [DOC -VISÃO]  = Documento de Visão e Escopo . 
+• [DOC -BACKLOG]  = Product Backlog e User Stories . 
+• [DOC -ARQ]  = Documento de Arquitetura de Software . 
+• [REL -SPRINT]  = Relatório de Fechamento de Sprint .  
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+Sprint 1  Concepção, Requisitos e 
+Planejamento Inicial  Documentos:  [DOC -
+VISÃO] preenchido com 
+definição clara do nicho de 
+mercado, problema 
+identificado, solução 
+proposta e escopo do 
+projeto; [DOC -REQ] com 
+levantamento inicial de 
+requisitos funcionais 
+(mínimo 15 RF) e não -
+funcionais (mínimo 10 
+RNF), com técnicas de 
+elicitação descritas; 
+[DOC -BACKLOG] com 
+Épicos definidos e mínimo 
+20 User Stories com 
+critérios de aceite bem 
+definidos.  
+Artefatos Visuais:  
+Wireframes/Protótipos de 
+baixa fidelidade das 5 
+principais telas (podem  
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+ser feitos em Figma, 
+Draw.io, Miro ou até 
+fotografias de papel). 
+Repositório:  Git criado e 
+configurado com 
+README.md descrevendo 
+o projeto, nicho e equipe. 
+Apresentação:  Cada 
+membro explica uma parte 
+(ex: um fala sobre o nicho, 
+outro sobre requisitos, 
+outro sobre User Stories). 
+Documento:  [REL -SPRINT] 
+com retrospectiva da 
+primeira semana (o que 
+deu certo, dificuldades 
+encontradas, plano para a 
+próxima Sprint).  
+Sprint 2  Arquitetura, Design e 
+Configuração do 
+Ambiente Técnico  Documentos:  [DOC -ARQ] 
+completo contendo: (1) 
+Stack tecnológico definido 
+e justificado (ex: React + 
+Node.js + PostgreSQL); (2) 
+Diagrama de arquitetura 
+em camadas mostrando 
+Frontend, Backend e 
+Banco de Dados com fluxo 
+de comunicação; (3) 
+Diagrama Entidade -
+Relacionamento (DER) ou 
+esquema NoSQL com 
+todas as tabelas/coleções 
+principais; (4) Dicionário 
+de dados descrevendo 
+cada tabela (campos, 
+tipos, restrições). [DOC -
+REQ] atualizado com 
+refinamentos baseado em 
+feedback da Sprint 1. 
+[DOC -BACKLOG] 
+atualizado com U ser 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+Stories priorizadas para as 
+próximas Sprints 
+(MoSCoW: Must, Should, 
+Could, Won’t). Código:  
+Estrutura de pastas criada 
+(frontend/, backend/, 
+database/, docs/); 
+Ambiente de 
+desenvolvimento 
+totalmente configurado 
+(Node.js/Python/Java 
+instalados); Banco de 
+dados criado com 
+schema/migrations 
+prontas; .gitignore e 
+package.json/requirement
+s.txt configurados. 
+Apresentação:  Apresentar 
+os diagramas de 
+arquitetura e explicar as 
+escolhas tecnológicas. 
+Documento:  [REL -SPRINT] 
+documentando decisões 
+arquiteturais, 
+impedim entos 
+encontrados (ex: 
+dificuldades na 
+configuração) e como 
+foram resolvidos.  
+Sprint 3  Backend e Banco de 
+Dados (Fundação da 
+Aplicação)  Documentos:  [DOC -ARQ] 
+atualizado com detalhes 
+de implementação 
+(padrões de projeto 
+utilizados, estrutura de 
+pastas); [DOC -BACKLOG] 
+com User Stories da Sprint 
+3 marcadas como 
+“Concluído”; 
+Documentação da API em 
+formato Swagger/OpenAPI 
+ou documento descritivo 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+listando todos os 
+endpoints implementados 
+(método HTTP, URL, 
+parâmetros, respostas 
+esperadas, códigos de 
+erro). Código:  Banco de 
+dados criado e populado 
+com dados de teste (pelo 
+menos 10 registros por 
+tabela); Primeiras rotas da 
+API implementadas (ex: 
+CRUD de Usuários, CRUD 
+de Serviços, endpoints de 
+autenticação); 
+Autenticação básica 
+implementada 
+(login/cadastro com 
+geração de token JWT); 
+Validações de entrada 
+implementadas (ex: email 
+válido, senha com mínimo 
+8 caracteres); Testes 
+unitários para as rotas 
+críticas (mínimo 5 testes 
+com cobertura ≥ 50%). 
+Demonstração Prática:  
+Executar requisições HTTP 
+(via Postman, Insomnia ou 
+cURL) mostrando as rotas 
+funcionando corretamente 
+(ex: criar usuário, fazer 
+login, listar serviços). 
+Código no Git:  Commits 
+descritivos mostrando o 
+progresso (ex: “feat: 
+implementar autenticação 
+JWT”, “feat: criar CRUD de 
+usuários”). Documento:  
+[REL -SPRINT] com 
+detalhes técnicos de 
+implementação, testes 
+realizados e bugs 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+encontrados/corrigidos.  
+Sprint 4  Frontend (Base) e 
+Integração Front -
+Backend  Documentos:  [DOC -
+BACKLOG] atualizado com 
+User Stories da Sprint 4 
+concluídas; Protótipos de 
+alta fidelidade das telas 
+implementadas (Figma 
+com componentes 
+reutilizáveis e guia de 
+estilos). Código:  Telas 
+principais criadas e 
+estilizadas (Login, 
+Cadastro, Dashboard 
+básico, Listagem de 
+Serviços, Perfil do 
+Usuário); Integração inicial 
+com o Backend 
+funcionando (chamadas 
+HTTP para autenticação, 
+listagem de dados, 
+cadastro); Tratamento 
+básico de erros e feedback 
+visual ao usuário (ex: 
+mensagens de 
+sucesso/erro, l oading 
+spinners); Responsividade 
+testada em dispositivos 
+móveis (Chrome DevTools, 
+teste em celular real se 
+possível); Navegação entre 
+telas funcionando. Testes:  
+Testes unitários para 
+componentes críticos 
+(mínimo 5 testes). 
+Demonstração Prática:  
+Executar o aplicativo 
+localmente, fazer login 
+com credenciais de teste, 
+cadastrar novo usuário, 
+visualizar dados vindos da 
+API, navegar entre telas. 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+Documento:  [REL -SPRINT] 
+com métricas de 
+cobertura de testes, 
+feedback de usabilidade 
+(ex: “tela de login ficou 
+confusa, vamos 
+melhorar”) e plano de 
+melhorias.  
+Sprint 5  Regras de Negócio (Core 
+do Sistema)  Documentos:  [DOC -REQ] 
+com requisitos funcionais 
+core marcados como “Em 
+Implementação” ou 
+“Concluído”; [DOC -
+BACKLOG] com User 
+Stories da Sprint 5 
+concluídas; Documento 
+técnico descrevendo a 
+lógica de negócio 
+implementada (ex: 
+algoritmo de 
+agendamento, validações 
+de conflito de horário, 
+cálculo de 
+disponibilidade). Código:  
+Lógica principal 
+implementada e testada 
+(ex: sistema de 
+agendamento com 
+validação de horários 
+conflitantes, cálculo de 
+duração de serviço, 
+verificação de 
+disponibilidade do 
+profissional); R egras de 
+negócio validadas no 
+Backend (não apenas no 
+Frontend); Testes unitários 
+e de integração para as 
+regras críticas (mínimo 10 
+testes com cobertura ≥ 
+60%); Frontend atualizado 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+para exibir corretamente a 
+lógica de negócio (ex: 
+desabilitar horários 
+indisponíveis). 
+Demonstração Prática:  
+Demonstrar o fluxo 
+completo de um caso de 
+uso principal (ex: cliente 
+agendando um serviço, 
+sistema validando 
+conflitos, confirmação de 
+agendamento). Tentar 
+agendar em um horário já 
+ocupado e mostrar a 
+validação funcionando. 
+Documento:  [REL -SPRINT] 
+com detalhes de bugs 
+encontrados, como foram 
+corrigidos e testes de 
+regressão executados.  
+Sprint 6  Refinamento, Dashboard 
+e Relatórios  Documentos:  [DOC -
+BACKLOG] com todas as 
+User Stories do projeto 
+mapeadas (indicando 
+quais serão 
+implementadas e quais 
+ficarão para versão futura); 
+Documentação de 
+Relatórios descrevendo os 
+dados exibidos no 
+Dashboard, gráficos e 
+métricas. Código:  
+Dashboard para o Gestor 
+implementado com 
+gráficos e métricas (ex: 
+total de agendamentos do 
+dia, faturamento do mês, 
+taxa de ocupação); 
+Funcionalidade de 
+relatórios implementada 
+(exportação em CSV/PDF 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+com dados de 
+agendamentos, 
+faturamento, etc.); 
+Melhorias na UI/UX (paleta 
+de cores consistente, 
+tipografia adequada, 
+espaçamento visual, 
+ícones); Tratamento 
+robusto de erros com 
+mensagens claras e 
+amigáveis (ex: “Desculpe, 
+não conseguimos carregar 
+os dados. Tente 
+novamente.”); Validações 
+de entrada em formulários 
+(ex: campos obrigatórios, 
+formato de email, datas 
+válidas). Testes:  Testes de 
+usabilidade com pelo 
+menos 2 pessoas externas 
+ao grupo (feedback 
+documentado em vídeo ou 
+texto). Demonstração 
+Prática:  Navegar pelo 
+Dashboard, gerar um 
+relatório, visualizar 
+gráficos, exportar dados 
+em CSV/PDF. 
+Documento:  [REL -SPRINT] 
+com feedback de 
+usabilidade coletado, 
+melhorias implementadas 
+e plano para a próxima 
+Sprint.  
+Sprint 7  Testes, Segurança e 
+Preparação para Deploy  Documentos:  [DOC -REQ] 
+com todos os requisitos 
+mapeados (status: 
+“Concluído”, “Não 
+Implementado” com 
+justificativa, ou 
+“Parcialmente 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+Implementado”); Plano de 
+Testes documentando 
+casos de teste executados 
+(testes unitários, 
+integração, E2E); Relatório 
+de Segurança 
+descrevendo as medidas 
+implementadas 
+(criptografia de senha com 
+bcrypt, HTTPS, proteção 
+contra SQL Injection, rate 
+limiting, etc.); Checklist de 
+Deploy (ex: variáveis de 
+ambiente configuradas, 
+backup do BD, plano de 
+rollback). Código:  Testes 
+automatizados com 
+cobertura mínima de 70% 
+(testes unitários, 
+integração e E2E); 
+Correção de todos os bugs 
+críticos identificados nas 
+Sprint s anteriores; 
+Otimização de 
+performance (queries 
+otimizadas, índices no BD, 
+cache implementado se 
+necessário); Código limpo 
+e bem documentado 
+(comments em funções 
+complexas, README 
+atualizado, documentação 
+de API completa). 
+Segurança:  Validação de 
+entrada em todos os 
+formulários (sanitização 
+de dados); Proteção 
+contra XSS (Cross -Site 
+Scripting); Proteção contra 
+CSRF (Cross -Site Request 
+Forgery); Rate limiting 
+implementado no login 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+(máximo 5 tentativas por 
+IP a cada 15 minutos); 
+Senhas criptografadas 
+com bcrypt. 
+Demonstração Prática:  
+Executar suite de testes 
+automatizados mostrando 
+a cobertura de testes; 
+Demonstrar as medidas de 
+segurança implementadas 
+(ex: tentar SQL Injection e 
+mostrar que foi 
+bloqueada). Documento:  
+[REL -SPRINT] com lista 
+completa de bugs 
+corrigidos, testes 
+executados e métricas de 
+qualidade do código.  
+Sprint 8  Entrega Final (Release) e 
+Retrospectiva Geral do 
+Projeto  Documentos Finais:  
+Pacote completo de 
+documentação incluindo: 
+[DOC -VISÃO] final, [DOC -
+REQ] final, [DOC -
+BACKLOG] final, [DOC -
+ARQ] final, Relatórios de 
+todas as Sprints (1 -8), 
+Documentação da API 
+final (Swagger/OpenAPI), 
+Manual do Usuário (guia 
+passo -a-passo de como 
+usar o sistema com 
+screenshots), Manual 
+Técnico (como fazer 
+deploy, configurar 
+ambiente, estrutura de 
+pastas, variáveis de 
+ambiente). Código:  
+Sistema completo e 
+funcional deployado em 
+ambiente de produção (ou 
+staging) com URL pública 
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+acessível; README.md 
+atualizado com instruções 
+de instalação, 
+configuração e uso; 
+Repositório Git com 
+histórico limpo de 
+commits descritivos (sem 
+commits com mensagens 
+genéricas como “fix”); 
+Arquivo CHANGELOG.md 
+listando todas as 
+funcionalidades 
+implementadas por Sprint. 
+Apresentação Final:  Cada 
+membro da equipe 
+apresenta uma parte 
+diferente do projeto (ex: 
+Aluno 1 fala sobre 
+requisitos e visão, Aluno 2 
+sobre arquitetura, Aluno 3 
+sobre implementação do 
+Backend, Aluno 4 sobre 
+implementação do 
+Frontend, Aluno  5 sobre 
+testes e deploy). 
+Demonstração completa 
+do sistema em produção 
+(login, cadastro, 
+agendamento, dashboard, 
+relatórios). Retrospectiva 
+Geral:  Documento de 
+retrospectiva do projeto 
+inteiro: (1) O que deu 
+certo? (2) O que deu 
+errado? (3) Principais 
+desafios enfrentados e 
+como foram resolvidos. (4) 
+Lições aprendidas. (5) 
+Sugestões para melhorias 
+futuras. (6) Feedback 
+sobre a metodologia 
+Scrum. Documento:  [REL -
+
+---PAGE---
+
+Sprint  Foco Principal  Entregáveis Exigidos na 
+Apresentação  
+SPRINT] final com 
+métricas do projeto (total 
+de linhas de código, 
+número de commits, horas 
+trabalhadas estimadas, 
+velocity das Sprints, etc.). 
+Nota Importante:  A 
+apresentação final é a 
+mais importante. Todos os 
+membros devem estar 
+preparados para 
+responder perguntas sobre 
+qualquer parte do projeto.  
+ 
+6. Critérios de Avaliação e Atribuição de Notas  
+A avaliação será contínua. A nota final será composta pela média das entregas 
+semanais e pela entrega final.  
+6.1. Parâmetros de Avaliação Semanal (Sprint)  
+Para cada apresentação semanal, o professor avaliará os seguintes critérios (Nota de 
+0 a 10):  
+1. Entrega de Valor (3,0 pts):  O grupo entregou o que prometeu no planejamento 
+da Sprint? O software está rodando?  
+2. Qualidade da Documentação (2,0 pts):  Os documentos exigidos para a fase 
+foram entregues, estão no padrão correto e refletem a realidade do software?  
+3. Aplicação da Engenharia de Software (2,0 pts):  O código reflete a arquitetura 
+planejada? As boas práticas (nomenclatura, modularidade, versionamento no 
+Git) estão sendo seguidas?  
+4. Apresentação e Domínio Individual (3,0 pts):  Clareza na comunicação. 
+Cada aluno  demonstrou domínio sobre a parte que desenvolveu? (Se um 
+aluno não souber explicar seu próprio código ou não falar, sua nota individual 
+será penalizada).  
+6.2. Penalidades  
+• Atraso na entrega da documentação: -2,0 pontos na nota da Sprint.  
+• Membro ausente na apresentação sem justificativa médica: Nota 0 na Sprint 
+para o membro.  
+
+---PAGE---
+
+• “Efeito Frankenstein” (Código copiado da internet sem entendimento ou 
+partes que não se integram): Zera o critério de Aplicação de Engenharia de 
+Software.  
+ 
+7. Modelos de Documentos (Templates)  
+Para padronizar as entregas, o professor fornecerá os seguintes templates que 
+deverão ser preenchidos e mantidos atualizados no repositório do projeto:  
+1. Template 01:  Documento de Visão e Escopo.  
+2. Template 02:  Product Backlog e User Stories.  
+3. Template 03:  Documento de Arquitetura de Software.  
+4. Template 04:  Relatório de Fechamento de Sprint.  
+(Estes documentos devem ser versionados junto com o código -fonte, 
+preferencialmente em formato Markdown no repositório do GitHub/GitLab do grupo).  
+ 
+ 
+Desejo a todos um excelente projeto! Lembrem -se: a comunicação constante 
+dentro do grupo e a aplicação rigorosa do Scrum são as chaves para o sucesso.  

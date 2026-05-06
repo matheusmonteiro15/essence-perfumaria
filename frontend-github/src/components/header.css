@@ -1,0 +1,231 @@
+.header {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* TOPO */
+.top-bar {
+  height: 82px; /* controla altura elegante */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  background-color: white;
+}
+
+/* LOGO */
+.logo-img {
+  width: 200px; /* maior e elegante */
+  max-height: 70px; /* evita esticar demais */
+  object-fit: contain;
+  display: block;
+}
+
+/* BUSCA */
+.search {
+  width: 40%;
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* ÍCONES */
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.icon-img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Deixa o ícone com a cor primária da marca (#96305a) quando logado */
+.icon-img.logged-in {
+  filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(314deg) brightness(86%) contrast(85%);
+}
+
+.header-icon {
+  text-decoration: none;
+  color: #96305a;
+  font-size: 22px;
+}
+
+/* MENU */
+.menu {
+  display: flex;
+  justify-content: flex-start;
+  gap: 32px;
+  background-color: #d8b8c8;
+  padding: 12px 48px;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+}
+
+/* ITEM */
+.menu-item {
+  position: relative;
+}
+
+/* BOTÃO MENU */
+.menu-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: #333;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  color: #96305a;
+}
+
+/* DROPDOWN */
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -50px;
+  min-width: 300px;
+  background-color: #d8b8c8;
+  padding: 15px 0;
+  border: 1px solid #555;
+  z-index: 100;
+}
+
+.menu-item:hover .dropdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+}
+
+.dropdown a {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 20px;
+  font-size: 11px;
+  font-family: 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+}
+
+.dropdown a:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+/* RESPONSIVO */
+@media (max-width: 800px) {
+  .top-bar {
+    height: auto;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .search {
+    width: 90%;
+  }
+
+  .menu {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .dropdown {
+    position: static;
+    box-shadow: none;
+    border-radius: 10px;
+  }
+}
+
+.search-form {
+  width: 40%;
+  position: relative;
+}
+
+.search-form .search {
+  width: 100%;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  padding: 10px;
+  z-index: 100;
+}
+
+.search-suggestions button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  background: transparent;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.search-suggestions button:hover {
+  background-color: #f7edf1;
+}
+
+.search-suggestions img {
+  width: 42px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.search-suggestions span {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-suggestions strong {
+  color: #333;
+  font-size: 13px;
+}
+
+.search-suggestions small {
+  color: #96305a;
+  font-size: 12px;
+}
+
+.search-suggestions p {
+  margin: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 🔥 ESTILOS DO CART BADGE */
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  background-color: #e63946;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
